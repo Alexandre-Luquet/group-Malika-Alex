@@ -1,21 +1,141 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<!-- <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+    Welcome {{ title }} {{name}}!
+  </h1> -->
 
-<router-outlet></router-outlet>
+ 
+<header>
+  <h1>
+    Welcome to the GroupGenerator!
+  </h1>
+  <h3>Entrez les noms et prénoms de votre liste et générez automatiquement des groupes déjà fait! *c'est magique*</h3>
+  <form [formGroup]="user">
+  <!-- <form [formGroup]="myForm"> -->
+    <div class="mdc-layout-grid--align-center form-group">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell--span-12">
+          <div class="mdc-text-field  mdc-text-field--no-label  myInput">
+            <input placeholder="Entrez votre prénom"type="text" id="tf-outlined" class="mdc-text-field__input form-control" formControlName="firstname">
+            <!-- <input type="text" id="tf-outlined" class="mdc-text-field__input form-control" [formControl]="firstname"> -->
+            <div class="mdc-notched-outline">
+              <div class="mdc-notched-outline__leading"></div>
+              <div class="mdc-notched-outline__notch">
+
+                <!-- <label for="tf-outlined" class="mdc-floating-label">Entrez votre prénom</label> -->
+              </div>
+              <div class="mdc-notched-outline__trailing"></div>
+            </div>
+          </div>
+
+
+          <div class="mdc-text-field mdc-text-field--no-label myInput">
+            <input placeholder="Entrez votre nom" type="text" id="tf-outlined"
+              class="mdc-text-field__input form-control" formControlName="lastname">
+            <div class="mdc-notched-outline">
+              <div class="mdc-notched-outline__leading"></div>
+              <div class="mdc-notched__notch">
+                <!-- <label for="tf-outlined" class="mdc-floating-label">Entrez votre Nom</label> -->
+              </div>
+              <div class="mdc-notched-outline__trailing"></div>
+            </div>
+          </div>
+
+          <div class="myButtons">
+            <button type="submit" (click)="submitmyForm()" class="mdc-fab bgButton" aria-label="Favorite">
+              <i class="material-icons">add</i>
+            </button>
+            <button (click)="showDiv()" class="mdc-fab bgButton" aria-label="Favorite">
+              <i class="material-icons">all_inclusive</i>
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </form>
+  
+</header>
+
+<main>
+  <div class="mdc-layout-grid--align-center myMain">
+    <div class="mdc-layout-grid__inner">
+      <div
+        class="mdc-layout-grid__cell--span-6 center-tab myContainerTb">
+         <div class="mdc-data-table">
+           <table class="mdc-data-table__table myTable" aria-label="Dessert calories">
+             <thead>
+               <tr class="mdc-data-table__header-row ">
+                 <th class="mdc-data-table__header-cell--align-center" role="columnheader" scope="col">N°</th>
+                 <th class="mdc-data-table__header-cell--align-center" role="columnheader" scope="col">Prénom</th>
+                 <th class="mdc-data-table__header-cell--align-center" role="columnheader" scope="col">Nom</th>
+               </tr>
+             </thead>
+             <tbody class="mdc-data-table__content center-tab">
+               <tr class="mdc-data-table__row" *ngFor="let user of userList ; let i= index">
+                 <td>{{i + 1}}</td> 
+                 <td>{{user.firstname}}</td>
+                 <td>{{user.lastname}}</td>  
+               </tr>
+               
+                 
+
+              
+
+             </tbody>
+           </table>
+         </div>
+
+      </div>
+
+      <div id="welcomeDiv" style="display:none;" class="mdc-layout-grid__cell--span-6 center-tab myContainerTb">
+        
+          <div class="mdc-data-table">
+            <table class="mdc-data-table__table myTable" aria-label="Dessert calories">
+              <thead>
+                <tr class="mdc-data-table__header-row center-tab">
+                  <th class="mdc-data-table__header-cell--align-center" role="columnheader" scope="col">Groupe N°</th>
+                  <th class="mdc-data-table__header-cell--align-center" role="columnheader" scope="col">Nom et prénom
+                  </th>
+                  <!-- <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Prénom</th> -->
+                </tr>
+              </thead>
+              <tbody class="mdc-data-table__content center-tab">
+                <ng-container *ngFor="let groups of groupList; let i= index">
+                <tr class="mdc-data-table__row center-tab" *ngFor=" let group of groups">
+
+                   <td>{{i + 1}}</td>
+                   <td>{{group.firstname  + " " +group.lastname}}</td>
+                   <!-- <td>{{group.lastname}}</td> -->
+
+                   <!-- <td>{{user.lastname}}</td> -->
+
+                </tr>
+                </ng-container>
+
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+
+      
+
+    </div>
+  </div>
+</main>
+     
+
+ 
+  
+
+
+
+
+ 
+ 
+  
