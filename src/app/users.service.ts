@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class Users {
-
-  uri = 'http://localhost:8080/addUser';
+export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  addUser(firstname, lastname) {
-    const obj = {
-      firstname: firstname,
-      lastname: lastname,
-      
-    };
-    console.log(obj);
-    this.http.post(`${this.uri}/add`, obj)
-      .subscribe(res => console.log('Done'));
+  getData() {
+    return this.http.get(`${environment.apiUrl}/getUsers`).toPromise()
+  }
+
+  getGroup() {
+    return this.http.get(`${environment.apiUrl}/addGroup`).toPromise()
+  }
+
+  submitmyForm(userData) {
+    console.log(userData)
+    return this.http.post(`${environment.apiUrl}/addUser`, { userData }, { responseType: 'text' }).toPromise();
   }
 }

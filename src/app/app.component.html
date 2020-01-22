@@ -11,18 +11,15 @@
   </h1>
   <h3>Entrez les noms et prénoms de votre liste et générez automatiquement des groupes déjà fait! *c'est magique*</h3>
   <form [formGroup]="user">
-  <!-- <form [formGroup]="myForm"> -->
     <div class="mdc-layout-grid--align-center form-group">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell--span-12">
           <div class="mdc-text-field  mdc-text-field--no-label  myInput">
-            <input placeholder="Entrez votre prénom"type="text" id="tf-outlined" class="mdc-text-field__input form-control" formControlName="firstname">
-            <!-- <input type="text" id="tf-outlined" class="mdc-text-field__input form-control" [formControl]="firstname"> -->
+            <input [(ngModel)]="prenom" placeholder="Entrez votre prénom"type="text" id="tf-outlined"  class="mdc-text-field__input form-control" formControlName="firstname">
             <div class="mdc-notched-outline">
               <div class="mdc-notched-outline__leading"></div>
               <div class="mdc-notched-outline__notch">
 
-                <!-- <label for="tf-outlined" class="mdc-floating-label">Entrez votre prénom</label> -->
               </div>
               <div class="mdc-notched-outline__trailing"></div>
             </div>
@@ -30,12 +27,11 @@
 
 
           <div class="mdc-text-field mdc-text-field--no-label myInput">
-            <input placeholder="Entrez votre nom" type="text" id="tf-outlined"
+            <input [(ngModel)]="nom" placeholder="Entrez votre nom" type="text" id="tf-outlined"
               class="mdc-text-field__input form-control" formControlName="lastname">
             <div class="mdc-notched-outline">
               <div class="mdc-notched-outline__leading"></div>
               <div class="mdc-notched__notch">
-                <!-- <label for="tf-outlined" class="mdc-floating-label">Entrez votre Nom</label> -->
               </div>
               <div class="mdc-notched-outline__trailing"></div>
             </div>
@@ -99,20 +95,18 @@
                   <th class="mdc-data-table__header-cell--align-center" role="columnheader" scope="col">Groupe N°</th>
                   <th class="mdc-data-table__header-cell--align-center" role="columnheader" scope="col">Nom et prénom
                   </th>
-                  <!-- <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Prénom</th> -->
                 </tr>
               </thead>
               <tbody class="mdc-data-table__content center-tab">
                 <ng-container *ngFor="let groups of groupList; let i= index">
-                <tr class="mdc-data-table__row center-tab" *ngFor=" let group of groups">
+                <tr class="mdc-data-table__row center-tab">
 
                    <td>{{i + 1}}</td>
-                   <td>{{group.firstname  + " " +group.lastname}}</td>
-                   <!-- <td>{{group.lastname}}</td> -->
-
-                   <!-- <td>{{user.lastname}}</td> -->
+                   <td>{{groups[0].firstname  + " " +groups[0].lastname}} + {{groups[1].firstname  + " " +groups[1].lastname}}</td>
+                  
 
                 </tr>
+               
                 </ng-container>
 
 

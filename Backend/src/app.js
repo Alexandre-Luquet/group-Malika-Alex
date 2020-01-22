@@ -43,16 +43,16 @@ let user = mongoose.model("users", userSchema);
 // Pour ajouter un utilisateur à la base de données
 api.post("/addUser", (req, res) => {
   let newUser = new user();
-  newUser.firstname = req.body.userData.firstname; // correspond au champ qu'on rentre dans postman 
-  newUser.lastname = req.body.userData.lastname;
- 
+   newUser.firstname = req.body.userData.firstname; // correspond au champ qu'on rentre dans postman 
+   newUser.lastname = req.body.userData.lastname;
+   console.log(req.body); 
   console.log(newUser);
 
 newUser.save(err => {
     if (err) {
       res.send(err);
     }
-    res.send("cooool");
+    res.send("L'user est bien enregistré");
   });
 });
 
@@ -84,7 +84,7 @@ api.get("/getUsers", (req,res)=> {
    
 
 
-
+//Algorithme pour créer des groupes 
 api.get("/addGroup", (req, res) => {
   
   user.find({}, (err, users) => {
